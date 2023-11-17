@@ -22,31 +22,15 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const dotenv_1 = __importDefault(require("dotenv"));
 const mongoose = __importStar(require("mongoose"));
-const users_1 = __importDefault(require("./routes/users"));
-dotenv_1.default.config();
-const app = (0, express_1.default)();
-const port = process.env.PORT;
-const mongoUri = process.env.MONGO_URI;
-if (!mongoUri) {
-    throw new Error("No mongo uri provided");
-}
-try {
-    mongoose.connect(mongoUri).then(() => {
-        console.log("✅ Connected to MongoDB");
-    });
-}
-catch (error) { }
-app.get("/", (req, res) => {
-    res.send("Express + TypeScript Server");
+const userSchema = new mongoose.Schema({
+    first_name: String,
+    last_name: String,
+    email: String,
+    gender: String,
+    avatar: String,
+    domain: String,
+    available: Boolean,
 });
-app.use("/api/users", users_1.default);
-app.listen(port, () => {
-    console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
-});
+exports.default = mongoose.model('User', userSchema);

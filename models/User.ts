@@ -10,4 +10,4 @@ const userSchema = new mongoose.Schema({
   available: Boolean,
 });
 
-module.exports = mongoose.model('User', userSchema);
+export default mongoose.model('User', userSchema);
