@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import * as mongoose from "mongoose";
 import userRouter from "./routes/users";
+import cors from "cors";
 
 dotenv.config();
 
@@ -9,6 +10,13 @@ const app: Express = express();
 const port = process.env.PORT;
 
 const mongoUri = process.env.MONGO_URI;
+
+app.use(express.json());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 if (!mongoUri) {
   throw new Error("No mongo uri provided");

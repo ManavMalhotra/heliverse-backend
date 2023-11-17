@@ -12,7 +12,7 @@ user.get("/", async (req: Request, res: Response) => {
     const users = await User.find({})
       .skip((page - 1) * limit)
       .limit(limit);
-    console.log("GET /api/users", users.length);
+    console.log("GET /api/users", users.length, "users found", parseInt(req.query.page as string));
 
     if (!users || users.length === 0) {
       res.status(404).json({ message: "No users found" });

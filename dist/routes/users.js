@@ -23,7 +23,7 @@ user.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const users = yield User_1.default.find({})
             .skip((page - 1) * limit)
             .limit(limit);
-        console.log("GET /api/users", users.length);
+        console.log("GET /api/users", users.length, "users found", parseInt(req.query.page));
         if (!users || users.length === 0) {
             res.status(404).json({ message: "No users found" });
             return;

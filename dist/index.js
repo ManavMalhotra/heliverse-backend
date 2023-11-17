@@ -30,10 +30,15 @@ const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const mongoose = __importStar(require("mongoose"));
 const users_1 = __importDefault(require("./routes/users"));
+const cors_1 = __importDefault(require("cors"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT;
 const mongoUri = process.env.MONGO_URI;
+app.use(express_1.default.json());
+app.use((0, cors_1.default)({
+    origin: "*",
+}));
 if (!mongoUri) {
     throw new Error("No mongo uri provided");
 }
